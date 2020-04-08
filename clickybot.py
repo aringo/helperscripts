@@ -33,7 +33,6 @@ def main():
                 sys.exit()
             else:
                 loop_away()
-        print(name.lower()[:4])
         print("You have 6 seconds to move the mouse to that position ")
         time.sleep(6)
         mouse_coordinates = pyautogui.position()
