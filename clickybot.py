@@ -20,8 +20,10 @@ def main():
         time.sleep(10)
         while True:
             for c in clicky._registered_clicky:
+                cur_position = pyautogui.position()
                 pyautogui.click(c.coordinates)
                 print(f"Clicked on {c.name}")
+                pyautogui.moveTo(cur_position)
                 time.sleep(60)
 
     while True:
