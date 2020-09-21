@@ -4,32 +4,37 @@ import argparse
 import ipaddress 
 import subprocess
 
+def nslookup(q,ip,ipfile): 
+    resolved_ip = None    
+    process = subprocess.Popen(["nslookup", q], stdout=subprocess.PIPE)
+    output, error = process.communicate()
+    output = output.decode().split('\n')
+
+    if ip == True:
+        for data in output:
+            if 'name' in data:
+                hostname = data.split("name = ")[-1].rstrip(".")
+                print(hostname)
+        return  
+    else:
+        resolved_ip = output[-3].split("Address: ")[-1]
+        
+    if ipfile:
+        if resolved_ip in ipfile:
+            print(q)
+    else:
+        print(resolved_ip)
+
+
+
 def main(args):
     query = args.query
 
     if args.ipfile:
         with open(args.ipfile,'r') as readhandle:
             ipfile = readhandle.read()
-
-    def nslookup(q,ip): 
-        process = subprocess.Popen(["nslookup", q], stdout=subprocess.PIPE)
-        output, error = process.communicate()
-        output = output.decode().split('\n')
-
-        if ip == True:
-            for data in output:
-                if 'name' in data:
-                    hostname = data.split("name = ")[-1].rstrip(".")
-                    print(hostname)
-        else:
-            resolved_ip = output[-3].split("Address: ")[-1]
-        
-        if args.ipfile:
-            if resolved_ip in ipfile:
-                print(q)
-        else:
-            print(resolved_ip)
-
+    else:
+        ipfile = None
 
     for q in query:
         ip = True
@@ -38,7 +43,7 @@ def main(args):
         except:
             ip = False
         
-        nslookup(q,ip)
+        nslookup(q,ip,ipfile)
 
 if __name__ == "__main__":
     parser = argparse.ArgumentParser(description="nslookup wrapper")
