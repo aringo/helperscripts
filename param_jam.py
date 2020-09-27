@@ -1,4 +1,7 @@
 #!/usr/bin/env python3
+
+## requires pyscreenshot in addition to selenium for firefox
+
 import sys 
 import argparse
 from time import sleep
