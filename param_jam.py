@@ -42,7 +42,7 @@ def document(payload,canary,param,time_to_wait):
     payload = payload.replace(canary,"document.domain")
     document_param = f"It was found that the {param} parameter was vulnerable to reflected cross-site scripting.  "
     document_param += f"To verify this vulnerability clicking on the link at \'{payload}\' will show the domain the code is executing in.  "
-    document_param += f"This results of this action can be seen in the attached {results_image} image.\n"
+    document_param += f"The results of this action can be seen in the attached {results_image} image.\n"
     report_results += document_param
     driver.get(payload)
     sleep(time_to_wait)
