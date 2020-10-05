@@ -9,8 +9,8 @@
 # Schema Dump
 {"query":"query MyQuery {\n   __schema {\n    types {\n      name\n      fields {\n       name\n      } \n    \n    }\n  }\n}","variables":null,"operationName":"MyQuery"}
 
-# Simple Query replace [NAME]
-{"query":"query Query {\n  [NAME] {\n    id\n  }\n}","variables":null,"operationName":"Query"}
+# Simple Query replace [NAME] with query name [Value] with id 
+{"query":"query Query {\n  [NAME] {\n    [Value]\n  }\n}","variables":null,"operationName":"Query"}
 
 # Introspection Old
 query IntrospectionQuery {
@@ -181,9 +181,9 @@ query MyQuery {
   }
 }
 
-# Simple Query replace [NAME] 
+# Simple Query replace [NAME] [Value]
 query Query {
   [NAME] {
-    id
+    [Value]
   }
 }
