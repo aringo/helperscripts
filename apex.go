@@ -29,9 +29,12 @@ func main() {
 	apexDomains := make(map[string]bool)
 	for _, domain := range domains {
 		parts := strings.Split(domain, ".")
-		if len(parts) == 2 {
-			apexDomain := strings.Join(parts, ".")
-			apexDomains[apexDomain] = true
+		for i := len(parts) - 2; i >= 0; i-- {
+			apexDomain := strings.Join(parts[i:], ".")
+			if len(apexDomain) > 0 && apexDomain[0] != '-' {
+				apexDomains[apexDomain] = true
+				break
+			}
 		}
 	}
 
