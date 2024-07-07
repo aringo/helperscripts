@@ -37,7 +37,7 @@ def text_to_image(command, text, font_path='/usr/share/fonts/truetype/dejavu/Dej
     image.save(output_path)
 
 def clean_command(command):
-    return re.sub(r'\W+', '', command)
+    return re.sub(r'\W', '_', command)
 
 if __name__ == "__main__":
     parser = argparse.ArgumentParser(description="Capture terminal output and save as an image.")
@@ -48,7 +48,7 @@ if __name__ == "__main__":
     parser.add_argument('-m', '--max_lines', type=int, default=50, help='Maximum number of lines')
     parser.add_argument('--bg_color', type=str, default='black', help='Background color (name or hex)')
     parser.add_argument('--text_color', type=str, default='white', help='Text color (name or hex)')
-    parser.add_argument('--command_color', type=str, default='yellow', help='Command text color (name or hex)')
+    parser.add_argument('--command_color', type=str, default='green', help='Command text color (name or hex)')
 
     args = parser.parse_args()
 
